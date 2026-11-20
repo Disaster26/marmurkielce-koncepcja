@@ -162,7 +162,7 @@ p{margin:0}
 .prob figcaption{font-weight:700;margin-top:10px;font-size:.98rem}
 .swiat{margin-top:26px;color:var(--mut);font-size:.98rem;max-width:60ch}
 @media (max-width:1100px){.kam{grid-template-columns:minmax(0,1fr)}}
-@media (max-width:620px){.prob{grid-template-columns:repeat(3,minmax(0,1fr))}.prob figure:nth-child(n+4){grid-column:span 1}.prob img{aspect-ratio:3/3.4}}
+@media (max-width:620px){.prob{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.prob img{aspect-ratio:3/4.2;clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%)}.prob figcaption{font-size:.74rem;margin-top:6px}}
 
 /* realizacje */
 .real{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2vw,34px) clamp(18px,1.8vw,30px)}
@@ -182,7 +182,14 @@ p{margin:0}
 .karta h3{margin-top:16px}
 .karta p{color:var(--mut);margin-top:6px;font-size:.98rem}
 @media (max-width:1100px){.real{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.real{grid-template-columns:minmax(0,1fr);gap:26px}.kar .nv{display:none}.karta h3{margin-top:12px}}
+@media (max-width:640px){
+  .real{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -16px;padding:0 16px;scroll-padding:0 16px;gap:14px}
+  .real::-webkit-scrollbar{display:none}
+  .karta{scroll-snap-align:start}
+  .kar .tor{overflow:hidden;touch-action:pan-x pan-y}
+  .kar .nv{display:none}.karta h3{margin-top:12px}
+}
+@media (min-width:641px){.strz.tel-only{display:none}}
 @media (hover:none){.kar .nv{display:none}}
 
 /* o nas */
@@ -241,6 +248,20 @@ form .btn{margin-top:22px}
 .stopka a:hover{color:#fff}
 .st-d{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:44px;padding-top:22px;border-top:1px solid #2c302e;font-size:.9rem}
 @media (max-width:900px){.st-g{grid-template-columns:repeat(2,minmax(0,1fr))}.st-g>div:first-child{grid-column:1/-1}}
+
+@media (max-width:640px){
+  .sek{padding:50px 0}
+  .glowa{margin-bottom:22px}
+  .proc figure img,.onas img{aspect-ratio:16/9}
+  .kroki{margin-top:22px}.kroki li{padding:13px 0}
+  .pol{margin-top:20px}.pol li{padding:6px 10px;font-size:.86rem}.pol ul{gap:6px}
+  .swiat{margin-top:16px}
+  .mapa{aspect-ratio:16/10!important;margin-top:20px}
+  .dane{margin-top:16px}.dane li{padding:10px 0}
+  form{padding:20px 16px}.pola{gap:12px}textarea{min-height:90px}
+  .onas .tekst p{margin-top:12px}.ludzie{margin-top:20px;gap:10px}
+  .st-d{margin-top:30px}
+}
 
 .wylinka-badge{display:inline-flex;align-items:center;gap:.4em;color:inherit;text-decoration:none;font-size:.875em;line-height:1;opacity:.85}
 .wylinka-badge:hover,.wylinka-badge:focus-visible{opacity:1}
@@ -417,10 +438,11 @@ body:has(.lb.otw) .mob{display:none}
     <div class="glowa">
       <div>
         <h2>Wybrane realizacje</h2>
-        <p>Pałace i hotele, kościoły, budynki publiczne i prywatne domy. Zdjęcia można przesuwać w każdej karcie i powiększać.</p>
+        <p>Pałace i hotele, kościoły, budynki publiczne i prywatne domy. Kliknij zdjęcie, aby obejrzeć całą galerię obiektu.</p>
       </div>
+      <div class="strz tel-only" data-nav="real-tor" hidden><button type="button" data-k="-1" aria-label="Poprzednia realizacja"><svg aria-hidden="true"><use href="#i-l"/></svg></button><button type="button" data-k="1" aria-label="Następna realizacja"><svg aria-hidden="true"><use href="#i-p"/></svg></button></div>
     </div>
-    <div class="real">
+    <div class="real" id="real-tor" data-tor>
       <article class="karta" data-grupa>
         <div class="kar">
           <div class="tor" id="k1" data-tor>
